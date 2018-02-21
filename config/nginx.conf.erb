@@ -181,8 +181,15 @@ http {
     }
 
     location @squarespace {
+      set $isquarespace 0;
       if ($host = '<%= ENV["WWW_BASE_DOMAIN"] %>') {
+        set $isquarespace 1;
+      }
+      if ($isquarespace = 0) {
         proxy_pass <%= ENV["WWW_PROXY_SITE"] %>;
+      }
+      if ($isquarespace = 0) {
+        proxy_pass http://app_server;
       }
     }
 
