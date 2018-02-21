@@ -67,15 +67,15 @@ http {
     server_name _;
     keepalive_timeout 5;
 
-    <% if ENV["FORCE_HTTPS"] %>
-      if ( $http_x_forwarded_proto != 'https' ) {
-        return 301 https://$host$request_uri;
-      }
-    <% end %>
+    # <% if ENV["FORCE_HTTPS"] %>
+    #   if ( $http_x_forwarded_proto != 'https' ) {
+    #     return 301 https://$host$request_uri;
+    #   }
+    # <% end %>
 
-    if ( $host = 'hoyagateway.peoplegrove.com' ) {
-      return 301 https://hoyagateway.georgetown.edu$request_uri;
-    }
+    # if ( $host = 'hoyagateway.peoplegrove.com' ) {
+    #   return 301 https://hoyagateway.georgetown.edu$request_uri;
+    # }
 
     <% if ENV["BASE_DOMAIN"] %>
       if ( $host = '<%= ENV["BASE_DOMAIN"] %>' ) {
