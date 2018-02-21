@@ -235,7 +235,7 @@ http {
           # add_header "Pragma" "no-cache";
           # add_header "Expires" "Tue, 31 Mar 1981 05:00:00 GMT";
           # add_header "Last-Modified" $date_gmt;
-          <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Base-Location on;<% end %>
+          # <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Base-Location on;<% end %>
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header Host $http_host;
           proxy_redirect off;
