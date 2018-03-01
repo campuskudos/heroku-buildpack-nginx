@@ -85,13 +85,13 @@ http {
 
     <% if ENV["API_URL"] %>
       location /api/census/RecordHit {
-        try_files @squarespace;
+        try_files @squarespace /dev/null =404;
       }
       location /api/form/FormSubmissionKey {
-        try_files @squarespace;
+        try_files @squarespace /dev/null =404;
       }
       location /api/form/SaveFormSubmission {
-        try_files @squarespace;
+        try_files @squarespace /dev/null =404;
       }
 
       location <%= ENV["API_PREFIX_PATH"] || "/api/" %> {
@@ -125,7 +125,7 @@ http {
       expires off;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Html on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files @squarespace;
+        try_files @squarespace /dev/null =404;
       <% end %>
     }
 
@@ -177,7 +177,7 @@ http {
     }
 
     location / {
-      try_files @prerender;
+      try_files @prerender /dev/null =404;
     }
 
     location @squarespace {
