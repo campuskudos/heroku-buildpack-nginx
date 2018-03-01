@@ -85,13 +85,13 @@ http {
 
     <% if ENV["API_URL"] %>
       location /api/census/RecordHit {
-        try_files $uri @squarespace;
+        try_files @squarespace;
       }
       location /api/form/FormSubmissionKey {
-        try_files $uri @squarespace;
+        try_files @squarespace;
       }
       location /api/form/SaveFormSubmission {
-        try_files $uri @squarespace;
+        try_files @squarespace;
       }
 
       location <%= ENV["API_PREFIX_PATH"] || "/api/" %> {
@@ -125,7 +125,7 @@ http {
       expires off;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Html on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files $uri @squarespace;
+        try_files @squarespace;
       <% end %>
     }
 
@@ -137,7 +137,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Speed on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files $uri @squarespace;
+        try_files dist/$uri client-v2/build/$uri @squarespace;
       <% end %>
     }
 
@@ -152,7 +152,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-JS on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files $uri @squarespace;
+        try_files dist/$uri client-v2/build/$uri @squarespace;
       <% end %>
     }
 
@@ -167,7 +167,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Font on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files $uri @squarespace;
+        try_files dist/$uri client-v2/build/$uri @squarespace;
       <% end %>
     }
 
@@ -177,7 +177,7 @@ http {
     }
 
     location / {
-      try_files $uri @prerender;
+      try_files @prerender;
     }
 
     location @squarespace {
