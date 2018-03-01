@@ -177,7 +177,7 @@ http {
     }
 
     location / {
-      try_files @prerender /dev/null =404;
+      try_files @prerender;
     }
 
     location @squarespace {
