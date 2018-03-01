@@ -130,6 +130,7 @@ http {
     }
 
     location ~* \.(ogg|ogv|svgz|mp4|css|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf|html|txt|htm)$ {
+      root /app;
       expires max;
       log_not_found off;
       access_log off;
@@ -137,7 +138,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Speed on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files dist/$uri client-v2/build/$uri @squarespace;
+        try_files /dist/$uri /client-v2/build/$uri @squarespace =404;
       <% end %>
     }
 
@@ -153,11 +154,12 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-JS on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files /dist/$uri /client-v2/build/$uri =404;
+        try_files /dist/$uri /client-v2/build/$uri @squarespace =404;
       <% end %>
     }
 
     location ~* \.(eot|oft|svg|ttf|woff)$ {
+      root /app;
       add_header 'Access-Control-Allow-Origin' '*';
       add_header 'Access-Control-Allow-Credentials' 'true';
       add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
@@ -168,7 +170,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-Font on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files dist/$uri client-v2/build/$uri @squarespace;
+        try_files /dist/$uri /client-v2/build/$uri @squarespace =404;
       <% end %>
     }
 
