@@ -185,7 +185,7 @@ http {
       if ($host = '<%= ENV["WWW_BASE_DOMAIN"] %>') {
         set $isquarespace 1;
       }
-      if ($isquarespace = 0) {
+      if ($isquarespace = 1) {
         proxy_pass <%= ENV["WWW_PROXY_SITE"] %>;
       }
       if ($isquarespace = 0) {
