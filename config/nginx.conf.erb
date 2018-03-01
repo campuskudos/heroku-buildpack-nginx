@@ -65,6 +65,7 @@ http {
   server {
     listen <%= ENV["PORT"] %>;
     server_name _;
+    root dist;
     keepalive_timeout 5;
 
     # <% if ENV["FORCE_HTTPS"] %>
@@ -152,7 +153,7 @@ http {
       fastcgi_hide_header Set-Cookie;
       <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-JS on;<% end %>
       <% if ENV["WWW_BASE_DOMAIN"] %>
-        try_files dist/$uri client-v2/build/$uri @squarespace;
+        try_files $uri ../client-v2/build/$uri =404;
       <% end %>
     }
 
