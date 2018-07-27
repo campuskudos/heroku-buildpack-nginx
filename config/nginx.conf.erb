@@ -102,6 +102,7 @@ http {
         proxy_set_header X-Host $host;
         proxy_ssl_session_reuse off;
         proxy_redirect off;
+        client_max_body_size 10M;
         <% if ENV["NGINX_DEBUG"] %>add_header X-SPA-API-Proxy on;<% end %>
       }
     <% end %>
